@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+      "rootDir": "components",
+      "outDir": "dist",
+      "target": "ESNext",
+      "module": "ESNext",
+      "esModuleInterop": true,
+      "moduleResolution": "node",
+      "composite": true,  // enables reuse of projects
+
+      // Language settings and other assertions
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "experimentalDecorators": true,
+      "isolatedModules": true,
+
+      // Compilation settings
+      "sourceMap": true,
+      "declarationMap": true,
+      "emitDecoratorMetadata": true,
+      "importHelpers": true,  // prevent extra boilerplate at the top of files
+  },
+  "include": ["components/**/*.ts"]
+}

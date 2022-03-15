@@ -1,0 +1,13 @@
+# Various NPM or PNPM stuff
+node_modules/
+.pnpm-debug.log
+
+# Typescript stuff
+*/dist/
+*.tsbuildinfo
+
+# Various
+.DS_Store
+
+# VSCode
+.vscode
