@@ -1,4 +1,5 @@
+import { Component } from "solid-js"
 
-export const Button: Component = (props) => {
-  return <button>{props.children}</button>
+export const Button: Component<{message: string}> = (props) => {
+  return <button onClick={() => alert(props.message)}>{props.children}</button>
 }

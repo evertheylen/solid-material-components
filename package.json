@@ -3,6 +3,16 @@
   "version": "0.0.1",
   "type": "module",
   "description": "Port of Material Design Components for SolidJS",
+  "files": ["dist"],
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    }
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -29,5 +39,9 @@
   "homepage": "https://github.com/evertheylen/solid-material-components#readme",
   "dependencies": {
     "solid-js": "^1.3.12"
+  },
+  "devDependencies": {
+    "vite": "^2.8.6",
+    "vite-plugin-solid": "^2.2.6"
   }
 }

@@ -1,3 +1,5 @@
+dist/
+
 # Various NPM or PNPM stuff
 node_modules/
 .pnpm-debug.log

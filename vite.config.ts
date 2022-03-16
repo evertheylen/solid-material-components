@@ -3,8 +3,6 @@ import { defineConfig } from 'vite';
 import solid from 'vite-plugin-solid';
 import pkg from './package.json';
 
-const entry = resolve(__dirname, 'src/index.ts');
-
 export default defineConfig({
   plugins: [solid()],
 
@@ -12,7 +10,7 @@ export default defineConfig({
     lib: {
       name: pkg.name,
       fileName: 'index',
-      entry,
+      entry: resolve(__dirname, 'components/index.ts'),
     },
 
     rollupOptions: {
