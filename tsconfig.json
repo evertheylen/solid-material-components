@@ -1,28 +1,29 @@
 {
   "compilerOptions": {
-      "rootDir": "components",
-      "outDir": "dist",
-      "target": "ESNext",
-      "module": "ESNext",
-      "esModuleInterop": true,
-      "moduleResolution": "node",
-      "composite": true,
+    "rootDir": "./components/",
+    "outDir": "./dist/",
+    "target": "ESNext",
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    //"composite": true,
 
-      // JSX stuff
-      "jsx": "preserve",
-      "jsxImportSource": "solid-js",
+    // JSX stuff
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
 
-      // Language settings and other assertions
-      "strict": true,
-      "forceConsistentCasingInFileNames": true,
-      "experimentalDecorators": true,
-      "isolatedModules": true,
+    // Language settings and other assertions
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "isolatedModules": true,
 
-      // Compilation settings
-      "sourceMap": true,
-      "declarationMap": true,
-      "emitDecoratorMetadata": true,
-      "importHelpers": true,  // prevent extra boilerplate at the top of files
+    // Compilation settings
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "emitDecoratorMetadata": true,
+    "importHelpers": true,  // prevent extra boilerplate at the top of files
   },
   "include": ["components/**/*.ts", "components/**/*.tsx"]
 }
