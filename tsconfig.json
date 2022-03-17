@@ -21,7 +21,8 @@
     // Compilation settings
     "sourceMap": true,
     "declaration": true,
-    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    //"declarationMap": true,
     "emitDecoratorMetadata": true,
     "importHelpers": true,  // prevent extra boilerplate at the top of files
   },
