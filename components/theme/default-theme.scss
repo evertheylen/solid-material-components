@@ -1,0 +1,10 @@
+
+// Solid colors
+@use '@material/theme' with (
+  $primary:#2c4f7c,
+  $secondary: #66e6ac,
+  $surface: #fff,
+  $background: #fff,
+  $error: #b00020,
+);
+

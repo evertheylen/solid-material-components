@@ -1,0 +1,7 @@
+@use "../theme/default-theme.scss";
+@use "@material/button/styles";
+
+// Prevent pointer giving focus inside.
+.mdc-icon-button svg {
+  pointer-events: none;
+}
