@@ -3,28 +3,28 @@
     "rootDir": "./components/",
     "outDir": "./dist/",
     "target": "ESNext",
-    "module": "ESNext",
+    "module": "commonjs", // "ESNext" ? :cry:
     "esModuleInterop": true,
+    "declaration": true,
+    "declarationDir": "./dist/types",
+    
+    "emitDeclarationOnly": true,
+    "strict": true,
     "moduleResolution": "node",
-    //"composite": true,
-
-    // JSX stuff
-    "jsx": "preserve",
+    "composite": true,
+    "jsx": "react-jsx",
     "jsxImportSource": "solid-js",
 
-    // Language settings and other assertions
-    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
     "isolatedModules": true,
 
-    // Compilation settings
     "sourceMap": true,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    //"declarationMap": true,
-    "emitDecoratorMetadata": true,
-    "importHelpers": true,  // prevent extra boilerplate at the top of files
+    
+    "declarationMap": true,
+    //"emitDecoratorMetadata": true,
+    //"importHelpers": true,  // prevent extra boilerplate at the top of files
   },
-  "include": ["components/**/*.ts", "components/**/*.tsx"]
+  "include": ["components"],
+  "exclude": ["node_modules"]
 }
