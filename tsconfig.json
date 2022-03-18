@@ -1,27 +1,23 @@
 {
   "compilerOptions": {
-    "rootDir": "./components/",
-    "outDir": "./dist/",
+    "rootDir": "components",
+    "outDir": "dist",
     "target": "ESNext",
-    "module": "commonjs", // "ESNext" ? :cry:
-    "esModuleInterop": true,
-    "declaration": true,
-    "declarationDir": "./dist/types",
+    "module": "ESNext", // "ESNext" ? :cry:
+    //"declaration": true,
     
-    "emitDeclarationOnly": true,
     "strict": true,
     "moduleResolution": "node",
     "composite": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "jsxImportSource": "solid-js",
 
     "forceConsistentCasingInFileNames": true,
-    "experimentalDecorators": true,
     "isolatedModules": true,
 
     "sourceMap": true,
-    
     "declarationMap": true,
+    
     //"emitDecoratorMetadata": true,
     //"importHelpers": true,  // prevent extra boilerplate at the top of files
   },

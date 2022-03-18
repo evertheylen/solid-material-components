@@ -7,16 +7,24 @@ Port of [Material Design Components](https://material.io/components/) for [Solid
 
 This library is a work in progress. I will add components as I need them myself. Released components should be perfectly usable, but API changes may happen.
 
-## Setup
+## Usage
 
-Just install it and import things!
+**Currently only supports usage with vite. A separate package will be released in a more traditional
+way that's usable in all circumstances.**
 
-## Theming
+  - Install `pnpm add solid-material-components`
+  - No need to import any CSS (thanks to vite)!
+  - Optionally import the icon font by placing the following in your `<head>` tag:
+    `<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">`
+  - Just import components and use them. For example:
 
-Like this:
+    ```
+    import 
+    ```
 
-```jsx
-import { useTheme } from "solid-material-components/theme";
+## TODOs
 
-document.body.style = useTheme({primary: "#ff0000", /* etc */});
-```
+  - [ ] (better) global theming solution
+  - [ ] non-vite package
+  - [ ] online demo page
+  - [ ] more components!

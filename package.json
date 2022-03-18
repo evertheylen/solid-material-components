@@ -3,26 +3,7 @@
   "version": "0.0.5",
   "type": "module",
   "description": "Port of Material Design Components for SolidJS",
-  "files": [
-    "dist"
-  ],
-  "main": "dist/solid-material-components.cjs.js",
-  "module": "dist/solid-material-components.es.js",
-  "types": "dist/types/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/solid-material-components.es.js",
-      "require": "./dist/solid-material-components.cjs.js"
-    }
-  },
   "sideEffects": false,
-  "scripts": {
-    "build:vite": "vite build",
-    "build:lib": "vite -c vite.config.lib.ts build",
-    "build:types": "tsc --declaration --emitDeclarationOnly",
-    "build": "vite -c vite.config.lib.ts build; tsc --declaration --emitDeclarationOnly",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/evertheylen/solid-material-components.git"
@@ -43,7 +24,13 @@
   "homepage": "https://github.com/evertheylen/solid-material-components#readme",
   "dependencies": {
     "@material/button": "^13.0.0",
+    "@material/checkbox": "^13.0.0",
+    "@material/chips": "^13.0.0",
+    "@material/form-field": "^13.0.0",
+    "@material/icon-button": "^13.0.0",
+    "@material/radio": "^13.0.0",
     "@material/ripple": "^13.0.0",
+    "@material/slider": "^13.0.0",
     "@material/theme": "^13.0.0",
     "solid-js": "^1.3.12"
   },
@@ -52,8 +39,8 @@
   },
   "devDependencies": {
     "sass": "^1.49.9",
+    "typescript": "^4.6.2",
     "vite": "^2.8.6",
-    "vite-plugin-solid": "^2.2.6",
-    "typescript": "^4.6.2"
+    "vite-plugin-solid": "^2.2.6"
   }
 }

@@ -1,0 +1,16 @@
+@use '../theme/default-theme.scss';
+@use '@material/theme/variables';
+
+@use "@material/chips";
+@use "@material/chips/styles";
+
+.mdc-evolution-chip-set--overflow {
+  overflow-y: visible;
+  overflow-x: scroll;
+
+  scrollbar-width: none;   // hide scrollbar on firefox
+  &::-webkit-scrollbar {
+    display: none;  // hide scrollbar on chrome
+  }
+}
+

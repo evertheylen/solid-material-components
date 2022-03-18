@@ -1,4 +1,4 @@
-import { JSX, createEffect, splitProps } from "solid-js";
+import { JSX, createEffect, splitProps, createSignal, Accessor, Setter } from "solid-js";
 
 export function assert(cond: boolean, msg?: string): asserts cond {
   if (!cond) {
@@ -7,12 +7,23 @@ export function assert(cond: boolean, msg?: string): asserts cond {
 }
 
 // Return or ref={...} more complex objects, including controlled state
-export function renderable<Output>(props: any, object: {html: JSX.Element} & Output) {
+export function renderable<Output>(props: {ref?: Ref<Output>}, object: Output & {html: JSX.Element}) {
   const result = () => object.html;
-  // @ts-ignore
   props.ref && props.ref(object);
   Object.assign(result, object);
   return result as (() => JSX.Element) & Output;
+}
+
+export type Ref<T> = (x: T & {html: JSX.Element}) => void;
+
+// Sorry, but it makes certain things so much easier...
+export class Signal<T> {
+  get: Accessor<T>;
+  set: Setter<T>;
+
+  constructor(value: T) {
+    [this.get, this.set] = createSignal(value);
+  }
 }
 
 export type SimpleSignalWrapper<T> = {get: () => T, set: (val: T) => void};
@@ -42,13 +53,11 @@ export function bind<T>(
 
 export type PropsAndAttrs<T extends keyof JSX.IntrinsicElements, P> = P & JSX.IntrinsicElements[T];
 
+export type OnlyPropsAndAttrs<T extends keyof JSX.IntrinsicElements, P> = Omit<PropsAndAttrs<T,P>, 'children'>;
+
 // To merge given attributes (that are supposed to go on root element) with our own
 type Attr<T extends keyof JSX.HTMLAttributes<El>, El = HTMLElement> = JSX.HTMLAttributes<El>[T];
 type MergeFunc<T extends keyof JSX.HTMLAttributes<El>, El = HTMLElement> = (a: Attr<T, El>, b: Attr<T, El>) => Attr<T, El>;
-
-export function defineMerge<T extends keyof JSX.HTMLAttributes<El>, El = HTMLElement>(key: T, func: MergeFunc<T, El>) {
-  return func;
-}
 
 export const merge: {[Key in keyof JSX.HTMLAttributes<HTMLElement>]: MergeFunc<Key>} = {
   "class": (a, b) => `${a ?? ''} ${b ?? ''}`,
@@ -68,7 +77,7 @@ export function splitPropsAndAttrs<T extends object, Props extends keyof T, Over
   return [props, overridden_attrs, rest_attrs];
 }
 
-// Ponyfills?
+// Ponyfills? --------------------
 
 export function object_from_entries<T>(iterable: Iterable<[key: string, val: T]>): Record<string, T> {
   return [...iterable].reduce((obj: any, [key, val]) => {

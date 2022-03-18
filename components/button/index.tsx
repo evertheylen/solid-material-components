@@ -1,6 +1,6 @@
 import { onMount, Show } from "solid-js";
 import { useRipple } from "../ripple";
-import { PropsAndAttrs, renderable, splitPropsAndAttrs } from "../utils";
+import { OnlyPropsAndAttrs, PropsAndAttrs, renderable, splitPropsAndAttrs } from "../utils";
 
 import "./style.scss";
 

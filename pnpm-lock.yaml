@@ -2,21 +2,35 @@ lockfileVersion: 5.3
 
 specifiers:
   '@material/button': ^13.0.0
+  '@material/checkbox': ^13.0.0
+  '@material/chips': ^13.0.0
+  '@material/form-field': ^13.0.0
+  '@material/icon-button': ^13.0.0
+  '@material/radio': ^13.0.0
   '@material/ripple': ^13.0.0
+  '@material/slider': ^13.0.0
   '@material/theme': ^13.0.0
   sass: ^1.49.9
   solid-js: ^1.3.12
+  typescript: ^4.6.2
   vite: ^2.8.6
   vite-plugin-solid: ^2.2.6
 
 dependencies:
   '@material/button': 13.0.0
+  '@material/checkbox': 13.0.0
+  '@material/chips': 13.0.0
+  '@material/form-field': 13.0.0
+  '@material/icon-button': 13.0.0
+  '@material/radio': 13.0.0
   '@material/ripple': 13.0.0
+  '@material/slider': 13.0.0
   '@material/theme': 13.0.0
   solid-js: 1.3.12
 
 devDependencies:
   sass: 1.49.9
+  typescript: 4.6.2
   vite: 2.8.6_sass@1.49.9
   vite-plugin-solid: 2.2.6_sass@1.49.9
 
@@ -381,6 +395,40 @@ packages:
       tslib: 2.3.1
     dev: false
 
+  /@material/checkbox/13.0.0:
+    resolution: {integrity: sha512-tRC6n9Jq7GgdU0d1F8NOvUy6WiRZR58tUgL1QqoiQK9PGKSt0dAF3Aa48uubO7/Lt9K4NqgwV6/OeHv8pHaM/w==}
+    dependencies:
+      '@material/animation': 13.0.0
+      '@material/base': 13.0.0
+      '@material/density': 13.0.0
+      '@material/dom': 13.0.0
+      '@material/feature-targeting': 13.0.0
+      '@material/ripple': 13.0.0
+      '@material/theme': 13.0.0
+      '@material/touch-target': 13.0.0
+      tslib: 2.3.1
+    dev: false
+
+  /@material/chips/13.0.0:
+    resolution: {integrity: sha512-Ov4runDbrROUpMqKyCi3lpknfrLzGwtV+/rfYIgTYUkEVpCHXHddxXxcjP4zqh3QLXnE6ma92PLGcxCb/zzogQ==}
+    dependencies:
+      '@material/animation': 13.0.0
+      '@material/base': 13.0.0
+      '@material/checkbox': 13.0.0
+      '@material/density': 13.0.0
+      '@material/dom': 13.0.0
+      '@material/elevation': 13.0.0
+      '@material/feature-targeting': 13.0.0
+      '@material/ripple': 13.0.0
+      '@material/rtl': 13.0.0
+      '@material/shape': 13.0.0
+      '@material/theme': 13.0.0
+      '@material/tokens': 13.0.0
+      '@material/touch-target': 13.0.0
+      '@material/typography': 13.0.0
+      tslib: 2.3.1
+    dev: false
+
   /@material/density/13.0.0:
     resolution: {integrity: sha512-ppJTzOsuhjQam5GvHaq/XZocZNUr+41XQ2sd5nONAmQ0wwzXgqG0FaxtF1EXqK3uZFadz+vAu6enagre9DXhTA==}
     dependencies:
@@ -411,6 +459,46 @@ packages:
       tslib: 2.3.1
     dev: false
 
+  /@material/form-field/13.0.0:
+    resolution: {integrity: sha512-cXs5uYA89KgrXrU1UYkl52JizeIK3Mx9LjBw4ZYiyQJzFaBTPYsYWGSJMad1HZhWlRiigGTyN1M9ePIxtBpi0Q==}
+    dependencies:
+      '@material/base': 13.0.0
+      '@material/feature-targeting': 13.0.0
+      '@material/ripple': 13.0.0
+      '@material/rtl': 13.0.0
+      '@material/theme': 13.0.0
+      '@material/typography': 13.0.0
+      tslib: 2.3.1
+    dev: false
+
+  /@material/icon-button/13.0.0:
+    resolution: {integrity: sha512-SdxFytWvbfN0fj7jHFq3DqK5/Zoms+Ipuv6fI8AzwgDFe7mXJ2euPahN+3XcmJ3BaSMyfYsdbcYdCWs8bgHW1w==}
+    dependencies:
+      '@material/base': 13.0.0
+      '@material/density': 13.0.0
+      '@material/elevation': 13.0.0
+      '@material/feature-targeting': 13.0.0
+      '@material/ripple': 13.0.0
+      '@material/rtl': 13.0.0
+      '@material/theme': 13.0.0
+      '@material/touch-target': 13.0.0
+      tslib: 2.3.1
+    dev: false
+
+  /@material/radio/13.0.0:
+    resolution: {integrity: sha512-6jeZ+dKSzBB/j2IZ7RjFl5mrB+EWnpv/x+U9w6ENLCdueM4+LKUqBAc2fC2WMycsqgoFnlB0xsO/sG+kN0J6fw==}
+    dependencies:
+      '@material/animation': 13.0.0
+      '@material/base': 13.0.0
+      '@material/density': 13.0.0
+      '@material/dom': 13.0.0
+      '@material/feature-targeting': 13.0.0
+      '@material/ripple': 13.0.0
+      '@material/theme': 13.0.0
+      '@material/touch-target': 13.0.0
+      tslib: 2.3.1
+    dev: false
+
   /@material/ripple/13.0.0:
     resolution: {integrity: sha512-hx4B40hB2rRfsGwf1jwo2GGlYDq0yUQjcMcMmXfQipPJNpQhy8ylmXKc1DBjmWf7EQ/MgbfCSYwPrYXrbGP31w==}
     dependencies:
@@ -436,6 +524,21 @@ packages:
       '@material/feature-targeting': 13.0.0
       '@material/rtl': 13.0.0
       '@material/theme': 13.0.0
+      tslib: 2.3.1
+    dev: false
+
+  /@material/slider/13.0.0:
+    resolution: {integrity: sha512-PW+3X9MiOoWmXhirYo/Mk2UYW00Tnsihrx5YJQ4+IxwbrUI75/8yUsO8kVr7YC+Eqhldz8oXzhIXglQFtbpolQ==}
+    dependencies:
+      '@material/animation': 13.0.0
+      '@material/base': 13.0.0
+      '@material/dom': 13.0.0
+      '@material/elevation': 13.0.0
+      '@material/feature-targeting': 13.0.0
+      '@material/ripple': 13.0.0
+      '@material/rtl': 13.0.0
+      '@material/theme': 13.0.0
+      '@material/typography': 13.0.0
       tslib: 2.3.1
     dev: false
 
@@ -1044,6 +1147,12 @@ packages:
   /tslib/2.3.1:
     resolution: {integrity: sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==}
     dev: false
+
+  /typescript/4.6.2:
+    resolution: {integrity: sha512-HM/hFigTBHZhLXshn9sN37H085+hQGeJHJ/X7LpBWLID/fbc2acUMfU+lGD98X81sKP+pFa9f0DZmCwB9GnbAg==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
 
   /vite-plugin-solid/2.2.6_sass@1.49.9:
     resolution: {integrity: sha512-J1RnmqkZZJSNYDW7vZj0giKKHLWGr9tS/gxR70WDSTYfhyXrgukbZdIfSEFbtrsg8ZiQ2t2zXcvkWoeefenqKw==}

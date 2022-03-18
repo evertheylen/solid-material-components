@@ -1,0 +1,60 @@
+body {
+  margin: 0;
+  background-color: lightgrey;
+  font-family: Roboto, sans-serif;
+}
+
+.page {
+  max-width: 600px;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  padding: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  min-height: calc(100vh - 80px);
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-gap {
+  gap: 8px;
+}
+
+.flex-stretch {
+  align-items: stretch;
+}
+
+.flex-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.flex-grow-alot {
+  flex-grow: 999999999999999999999999999999;
+}
+
+.flex-no-shrink {
+  flex-shrink: 0;
+}
+
+h3 {
+  padding-top: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}

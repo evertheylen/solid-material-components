@@ -1,6 +1,5 @@
 @use 'sass:color';
 @use "../theme/default-theme.scss";
-@use "@material/button/styles";
 @use '@material/theme/theme-color';
 
 // Note that importing like this is not actually documented. `core-styles` does not exist.

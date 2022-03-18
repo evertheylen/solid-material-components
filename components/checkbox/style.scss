@@ -1,0 +1,4 @@
+@use "../theme/default-theme.scss";
+
+@use "@material/checkbox";
+@include checkbox.core-styles;
