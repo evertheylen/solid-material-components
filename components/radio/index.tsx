@@ -19,7 +19,7 @@ let radio_group_counter = 0;
 export const RadioGroup = (props: PropsWithChildren<{
   group?: string,
   initActiveKey?: string,
-  ref: Ref<{activeKey: Signal<string|null>}>
+  ref?: Ref<{activeKey: Signal<string|null>}>
 }>) => {
   const group = props.group ?? `smc-radio-group-${radio_group_counter++}`;
   const input_map = new Map<string, MDCRadio>();

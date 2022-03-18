@@ -9,7 +9,7 @@ export const Slider = (all_props: OnlyPropsAndAttrs<'div', {
   max?: number,
   step?: number,
   init_value?: number,
-  ref: Ref<{value: Signal<number>}>,
+  ref?: Ref<{value: Signal<number>}>,
 }>) => {
   const [props, extra_attrs, attrs] = splitPropsAndAttrs(all_props,
     ["min", "max", "step", "init_value", "ref"], ["class"]
