@@ -3,10 +3,10 @@ import { MDCChipSet, MDCChipSetSelectionEventDetail } from '@material/chips';
 import { MDCChipActionType } from '@material/chips/action/constants';
 
 import "./style.scss";
-import { assert, PropsAndAttrs, splitPropsAndAttrs } from '../utils';
+import { assert, PropsAndAttrs, Ref, renderable, Signal, splitPropsAndAttrs } from '../utils';
 
-// TODO harmonize state management here. Is it controlled or uncontrolled?
-// TODO remove having to manage state in MDCChipSet!
+// TODO remove having to manage state in MDCChipSet?
+// TODO action chips, choice chips, (shapes?)
 // TODO provide outlined style (not in MDC)
 
 const ParentChipSetContext = createContext<() => MDCChipSet>();
@@ -65,11 +65,13 @@ export const FilterChipSet = (all_props: PropsAndAttrs<'span', {
 let chipCounter = 0;
 
 export const FilterChip = (all_props: PropsAndAttrs<'span', {
-  disabled?: boolean, selected?: boolean, setSelected?: (selected: boolean) => void, icon?: string
+  disabled?: boolean, initChecked?: boolean, icon?: string, ref?: Ref<{checked: Signal<boolean>}>
 }>) => {
   const [props, extra_attrs, attrs] = splitPropsAndAttrs(
-    all_props, ["disabled", "selected", "setSelected", "icon", "children"], ["class", "classList"]
+    all_props, ["disabled", "initChecked", "icon", "children", "ref"], ["class", "classList"]
   );
+
+  const checked = new Signal(props.initChecked ?? false);
 
   const id = `smdc-chip-${chipCounter++}`;
   let parent!: MDCChipSet;
@@ -82,20 +84,21 @@ export const FilterChip = (all_props: PropsAndAttrs<'span', {
     index = parent.getChipIndexByID(id);
 
     parent.listen<CustomEvent<MDCChipSetSelectionEventDetail>>('MDCChipSet:selection', (evt) => {
-      if (props.setSelected !== undefined && evt.detail.chipIndex === index) {
-        props.setSelected(evt.detail.isSelected);
+      if (evt.detail.chipIndex === index) {
+        checked.set(evt.detail.isSelected);
       }
+      console.log(parent);
     });
   });
 
   createEffect(() => {
     // TODO this is ran too late, state should be present without the animation...
-    if (props.selected !== parent.getSelectedChipIndexes().has(index)) {
-      parent.setChipSelected(index, MDCChipActionType.PRIMARY, props.selected ?? false);
+    if (checked.get() !== parent.getSelectedChipIndexes().has(index)) {
+      parent.setChipSelected(index, MDCChipActionType.PRIMARY, checked.get());
     }
   });
 
-  return (
+  const html = (
     <span
       class={extra_attrs.class("mdc-evolution-chip mdc-evolution-chip--selectable mdc-evolution-chip--filter mdc-evolution-chip--with-primary-graphic")}
       classList={extra_attrs.classList({
@@ -123,4 +126,6 @@ export const FilterChip = (all_props: PropsAndAttrs<'span', {
       </span>
     </span>
   );
+
+  return renderable(props, {html, checked});
 }

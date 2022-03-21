@@ -15,7 +15,7 @@ export const ChipDemo: Component = () => {
     <p>Selected: {chips.map(({name, signal}) => signal.get().toString()).join(", ")}</p>
     <FilterChipSet>
       <For each={chips}>{({name, signal, ...attrs}) => 
-        <FilterChip selected={signal.get()} setSelected={(x) => signal.set(x)} {...attrs}>{name}</FilterChip>
+        <FilterChip {...attrs}>{name}</FilterChip>
       }</For>
     </FilterChipSet>
   </>
