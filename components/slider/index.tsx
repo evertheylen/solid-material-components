@@ -1,30 +1,30 @@
 import { events, MDCSlider, MDCSliderChangeEventDetail } from "@material/slider";
 import { createSignal, onCleanup, onMount, Setter } from "solid-js";
-import { OnlyPropsAndAttrs, Ref, renderable, Signal, SimpleSignalWrapper, splitPropsAndAttrs } from "../utils";
+import { createOrInitSignal, OnlyPropsAndAttrs, Ref, renderable, Signal, SignalInit, SimpleSignalWrapper, splitPropsAndAttrs } from "../utils";
 
 import "./style.scss";
 
 export const Slider = (all_props: OnlyPropsAndAttrs<'div', {
+  value?: SignalInit<number>,
   min?: number,
   max?: number,
   step?: number,
-  init_value?: number,
   ref?: Ref<{value: Signal<number>}>,
 }>) => {
   const [props, extra_attrs, attrs] = splitPropsAndAttrs(all_props,
-    ["min", "max", "step", "init_value", "ref"], ["class"]
+    ["min", "max", "step", "value", "ref"], ["class"]
   );
 
   let slider_el!:HTMLDivElement;
   let slider!: MDCSlider;
 
-  const init_value = props.init_value ?? 50;
-  const [getValue, setValue] = createSignal(init_value);
+  const value = createOrInitSignal(props.value, 50);
+  const init_value = value.get();
 
   onMount(() => {
     slider = MDCSlider.attachTo(slider_el);
     slider.listen(events.INPUT, (event: CustomEvent<MDCSliderChangeEventDetail>) => {
-      setValue(event.detail.value);
+      value.set(event.detail.value);
     });
   });
 
@@ -55,11 +55,12 @@ export const Slider = (all_props: OnlyPropsAndAttrs<'div', {
   return renderable(props, {
     html,
     value: {
-      get: getValue,
-      set: ((val) => {
-        const newval = setValue(val);
+      get: () => value.get(),
+      set: (val) => {
+        const newval = value.set(val);
         slider.setValue(newval);
-      }) as Setter<number>
+        return newval;
+      }
     },
   });
 }

@@ -1,7 +1,7 @@
-import { Component, createSignal, For } from "solid-js";
+import { Component, createSignal, For, onMount } from "solid-js";
 
 import { FilterChipSet, FilterChip } from "../components/chips";
-import { Signal } from "../components/utils";
+import { bind, Signal, unwrap } from "../components/utils";
 
 export const ChipDemo: Component = () => {
   const chips = [
@@ -15,7 +15,7 @@ export const ChipDemo: Component = () => {
     <p>Selected: {chips.map(({name, signal}) => signal.get().toString()).join(", ")}</p>
     <FilterChipSet>
       <For each={chips}>{({name, signal, ...attrs}) => 
-        <FilterChip {...attrs}>{name}</FilterChip>
+        <FilterChip checked={signal} {...attrs}>{name}</FilterChip>
       }</For>
     </FilterChipSet>
   </>

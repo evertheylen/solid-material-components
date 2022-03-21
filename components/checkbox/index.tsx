@@ -2,21 +2,20 @@ import { MDCCheckbox } from "@material/checkbox";
 import { createEffect, onCleanup, onMount, useContext } from "solid-js";
 
 import { FormFieldContext } from "../formfield";
-import { OnlyPropsAndAttrs, Ref, renderable, Signal, splitPropsAndAttrs } from "../utils";
+import { createOrInitSignal, OnlyPropsAndAttrs, Ref, renderable, Signal, SignalInit, splitPropsAndAttrs } from "../utils";
 
 import "./style.scss";
 
-// TODO:
-//   - mixed state seems to have a slight delay when displaying
+// TODO mixed state seems to have a slight delay when displaying
 
 export const Checkbox = (all_props: OnlyPropsAndAttrs<'div', {
-  initChecked?: boolean | null,
+  checked?: SignalInit<boolean | null>,
   disabled?: boolean,
   id?: string,
   ref?: Ref<{checked: Signal<boolean | null>}>
 }>) => {
   const [props, extra_attrs, attrs] = splitPropsAndAttrs(
-    all_props, ["initChecked", "disabled", "id", "ref"], ["class"]
+    all_props, ["checked", "disabled", "id", "ref"], ["class"]
   );
   
   const ffCtx = useContext(FormFieldContext);
@@ -26,10 +25,8 @@ export const Checkbox = (all_props: OnlyPropsAndAttrs<'div', {
   let checkboxElement!: HTMLDivElement;
 
   // static stuff
-  const initChecked = props.initChecked === undefined ? false : props.initChecked;
-
-  // readwrite state
-  const checked = new Signal<boolean | null>(initChecked);
+  const checked = createOrInitSignal(props.checked, false);
+  const initChecked = checked.get();
 
   onMount(() => {
     checkbox = new MDCCheckbox(checkboxElement)

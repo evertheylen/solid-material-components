@@ -3,9 +3,9 @@ import { MDCChipSet, MDCChipSetSelectionEventDetail } from '@material/chips';
 import { MDCChipActionType } from '@material/chips/action/constants';
 
 import "./style.scss";
-import { assert, PropsAndAttrs, Ref, renderable, Signal, splitPropsAndAttrs } from '../utils';
+import { assert, createOrInitSignal, PropsAndAttrs, Ref, renderable, Signal, splitPropsAndAttrs, SignalInit } from '../utils';
 
-// TODO remove having to manage state in MDCChipSet?
+// TODO remove having to pass through calls to MDCChipSet?
 // TODO action chips, choice chips, (shapes?)
 // TODO provide outlined style (not in MDC)
 
@@ -65,13 +65,16 @@ export const FilterChipSet = (all_props: PropsAndAttrs<'span', {
 let chipCounter = 0;
 
 export const FilterChip = (all_props: PropsAndAttrs<'span', {
-  disabled?: boolean, initChecked?: boolean, icon?: string, ref?: Ref<{checked: Signal<boolean>}>
+  checked?: SignalInit<boolean>,
+  disabled?: boolean,
+  icon?: string,
+  ref?: Ref<{checked: Signal<boolean>}>,
 }>) => {
   const [props, extra_attrs, attrs] = splitPropsAndAttrs(
-    all_props, ["disabled", "initChecked", "icon", "children", "ref"], ["class", "classList"]
+    all_props, ["disabled", "checked", "icon", "children", "ref"], ["class", "classList"]
   );
 
-  const checked = new Signal(props.initChecked ?? false);
+  const checked = createOrInitSignal(props.checked, false);
 
   const id = `smdc-chip-${chipCounter++}`;
   let parent!: MDCChipSet;
@@ -87,7 +90,6 @@ export const FilterChip = (all_props: PropsAndAttrs<'span', {
       if (evt.detail.chipIndex === index) {
         checked.set(evt.detail.isSelected);
       }
-      console.log(parent);
     });
   });
 

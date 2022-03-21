@@ -1,6 +1,6 @@
 import { createContext, createEffect, onCleanup, onMount, PropsWithChildren, useContext } from "solid-js";
 import { MDCRadio } from "@material/radio";
-import { assert, OnlyPropsAndAttrs, Ref, renderable, Signal, splitPropsAndAttrs } from "../utils";
+import { assert, createOrInitSignal, OnlyPropsAndAttrs, Ref, renderable, Signal, SignalInit, splitPropsAndAttrs } from "../utils";
 
 import "./style.scss";
 import { FormFieldContext } from "../formfield";
@@ -18,13 +18,13 @@ let radio_group_counter = 0;
 
 export const RadioGroup = (props: PropsWithChildren<{
   group?: string,
-  initActiveKey?: string,
+  activeKey?: SignalInit<string|null>,
   ref?: Ref<{activeKey: Signal<string|null>}>
 }>) => {
   const group = props.group ?? `smc-radio-group-${radio_group_counter++}`;
   const input_map = new Map<string, MDCRadio>();
 
-  const activeKey = new Signal<string|null>(props.initActiveKey ?? null);
+  const activeKey = createOrInitSignal(props.activeKey, null);
 
   const delegate: RadioGroupDelegate = {
     group,

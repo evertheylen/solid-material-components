@@ -15,9 +15,9 @@ export const CheckboxDemo = () => {
     <>
       <div class="flex-col">
         <FormField><Checkbox ref={checkbox}/><Label>Checkbox is {checked.get().toString()}</Label></FormField>
-        <FormField><Checkbox initChecked={null}/><Label>Semi checked</Label></FormField>
-        <FormField><Checkbox disabled={true} initChecked={true}/><Label>Disabled (checked) checkbox</Label></FormField>
-        <FormField><Checkbox disabled={true} initChecked={false}/><Label>Disabled (unchecked) checkbox</Label></FormField>
+        <FormField><Checkbox checked={{init: null}}/><Label>Semi checked</Label></FormField>
+        <FormField><Checkbox disabled={true} checked={{init: true}}/><Label>Disabled (checked) checkbox</Label></FormField>
+        <FormField><Checkbox disabled={true} checked={{init: false}}/><Label>Disabled (unchecked) checkbox</Label></FormField>
       </div>
     </>
   )
