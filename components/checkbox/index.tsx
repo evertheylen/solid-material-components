@@ -2,17 +2,17 @@ import { MDCCheckbox } from "@material/checkbox";
 import { createEffect, onCleanup, onMount, useContext } from "solid-js";
 
 import { FormFieldContext } from "../formfield";
-import { createOrInitSignal, OnlyPropsAndAttrs, Ref, renderable, Signal, SignalInit, splitPropsAndAttrs } from "../utils";
+import { createOrInitSignal, OnlyPropsAndAttrs, Ref, renderable, SignalInit, SimpleSignal, splitPropsAndAttrs } from "../utils";
 
 import "./style.scss";
 
-// TODO mixed state seems to have a slight delay when displaying
+// TODO indeterminate state seems to have a slight delay when displaying
 
 export const Checkbox = (all_props: OnlyPropsAndAttrs<'div', {
   checked?: SignalInit<boolean | null>,
   disabled?: boolean,
   id?: string,
-  ref?: Ref<{checked: Signal<boolean | null>}>
+  ref?: Ref<{checked: SimpleSignal<boolean | null>}>
 }>) => {
   const [props, extra_attrs, attrs] = splitPropsAndAttrs(
     all_props, ["checked", "disabled", "id", "ref"], ["class"]

@@ -7,10 +7,11 @@ import { ThemeDemo } from './theme';
 import { useTheme } from "../components/theme";
 import { CheckboxDemo } from './checkbox';
 import { RadioDemo } from './radio';
-
-import "./style.scss";
 import { ChipDemo } from './chips';
 import { SliderDemo } from './slider';
+import { MenuDemo } from './menu';
+
+import "./style.scss";
 
 // For theme demo
 const [primaryColor, setPrimaryColor] = createSignal<string | undefined>();
@@ -33,6 +34,8 @@ const App = () => (
     <ChipDemo/>
     <h3>Slider</h3>
     <SliderDemo/>
+    <h3>Menu</h3>
+    <MenuDemo/>
   </div>
 )
 

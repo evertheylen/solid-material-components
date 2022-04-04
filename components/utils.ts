@@ -32,8 +32,11 @@ export type Ref<T> = (x: T & {html: JSX.Element}) => void;
 // State management ---------------------------------------
 
 // Sorry, but it makes certain things so much easier...
-export class Signal<T> {
+export type SimpleSignal<T> = {get: () => T, set: (val: T) => any};
+
+export class Signal<T> implements SimpleSignal<T> {
   get: Accessor<T>;
+  // @ts-ignore TODO? Did typescript completely forget contra/covariance?
   set: Setter<T>;
 
   constructor(value: T) {
@@ -41,15 +44,14 @@ export class Signal<T> {
   }
 }
 
-export type SimpleSignalWrapper<T> = {get: () => T, set: (val: T) => void};
-export type SignalList<T> = [Accessor<T>, Setter<T>]
+export type SignalList<T> = [Accessor<T>, (val: T) => any]
 
 // Some state is more naturally modelled as controlled state (and forced this way by MDC). If
 // you want to a 2-way binding, you can do so with this utility function.
-export function bind<T>(source_signal: SimpleSignalWrapper<T>, target_signal: SimpleSignalWrapper<T>): void;
+export function bind<T>(source_signal: SimpleSignal<T>, target_signal: SimpleSignal<T>): void;
 export function bind<T>(source_get: () => T, source_set: (x: T) => void, target_get: () => T, target_set: (x: T) => void): void;
 export function bind<T>(
-  ...args: [SimpleSignalWrapper<T>, SimpleSignalWrapper<T>] | [() => T, (val: T) => void, () => T, (val: T) => void]
+  ...args: [SimpleSignal<T>, SimpleSignal<T>] | [() => T, (val: T) => void, () => T, (val: T) => void]
 ) {
   // Some experiments: https://playground.solidjs.com/?hash=157747006&version=1.3.9
   if (args.length === 2) {
@@ -67,11 +69,11 @@ export function bind<T>(
   }
 }
 
-export type SignalInit<T> = (Signal<T> | SignalList<T> | {init: T});
+export type SignalInit<T> = (SimpleSignal<T> | SignalList<T> | {init: T});
 
-export function createOrInitSignal<T>(state: SignalInit<T>): Signal<T> ;
-export function createOrInitSignal<T>(state: SignalInit<T> | undefined, defaultInit: T, ): Signal<T> ;
-export function createOrInitSignal<T>(...args: [SignalInit<T>] | [SignalInit<T> | undefined, T]): Signal<T> {
+export function createOrInitSignal<T>(state: SignalInit<T>): SimpleSignal<T> ;
+export function createOrInitSignal<T>(state: SignalInit<T> | undefined, defaultInit: T, ): SimpleSignal<T> ;
+export function createOrInitSignal<T>(...args: [SignalInit<T>] | [SignalInit<T> | undefined, T]): SimpleSignal<T> {
   let value: SignalInit<T> | undefined = undefined;
   let defaultInit!: T;
   if (args.length === 1) {
@@ -83,14 +85,14 @@ export function createOrInitSignal<T>(...args: [SignalInit<T>] | [SignalInit<T> 
 
   if (value !== undefined) {
     if ('init' in value) {
-      return new Signal<T>(value.init);
+      return new Signal<T>(value.init) as SimpleSignal<T>;
     } else if (Array.isArray(value)) {
       return {get: value[0], set: value[1]};
     } else {
-      return value;
+      return value as SimpleSignal<T>;
     }
   } else {
-    return new Signal<T>(defaultInit);
+    return new Signal<T>(defaultInit) as SimpleSignal<T>;
   }
 }
 
@@ -126,7 +128,7 @@ export function splitPropsAndAttrs<T extends object, Props extends keyof T, Over
 
 // Ponyfills? ---------------------------------------------
 
-export function object_from_entries<T>(iterable: Iterable<[key: string, val: T]>): Record<string, T> {
+export function object_from_entries<T>(iterable: Iterable<[key: string | number | symbol, val: T]>): Record<string, T> {
   return [...iterable].reduce((obj: any, [key, val]) => {
     obj[key] = val
     return obj

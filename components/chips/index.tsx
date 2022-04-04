@@ -75,6 +75,7 @@ export const FilterChip = (all_props: PropsAndAttrs<'span', {
   );
 
   const checked = createOrInitSignal(props.checked, false);
+  const initChecked = checked.get();
 
   const id = `smdc-chip-${chipCounter++}`;
   let parent!: MDCChipSet;
@@ -105,7 +106,9 @@ export const FilterChip = (all_props: PropsAndAttrs<'span', {
       class={extra_attrs.class("mdc-evolution-chip mdc-evolution-chip--selectable mdc-evolution-chip--filter mdc-evolution-chip--with-primary-graphic")}
       classList={extra_attrs.classList({
         'mdc-evolution-chip--disabled': props.disabled,
-        "mdc-evolution-chip--with-primary-icon": props.icon !== undefined
+        "mdc-evolution-chip--with-primary-icon": props.icon !== undefined,
+        // Prevent initial animation on page load
+        "mdc-evolution-chip--selected": initChecked,
       })}
       role="presentation"
       id={id}

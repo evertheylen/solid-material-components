@@ -4,11 +4,18 @@ specifiers:
   '@material/button': ^13.0.0
   '@material/checkbox': ^13.0.0
   '@material/chips': ^13.0.0
+  '@material/floating-label': ^13.0.0
   '@material/form-field': ^13.0.0
   '@material/icon-button': ^13.0.0
+  '@material/line-ripple': ^13.0.0
+  '@material/list': ^13.0.0
+  '@material/menu': ^13.0.0
+  '@material/menu-surface': ^13.0.0
+  '@material/notched-outline': ^13.0.0
   '@material/radio': ^13.0.0
   '@material/ripple': ^13.0.0
   '@material/slider': ^13.0.0
+  '@material/textfield': ^13.0.0
   '@material/theme': ^13.0.0
   sass: ^1.49.9
   solid-js: ^1.3.12
@@ -20,11 +27,18 @@ dependencies:
   '@material/button': 13.0.0
   '@material/checkbox': 13.0.0
   '@material/chips': 13.0.0
+  '@material/floating-label': 13.0.0
   '@material/form-field': 13.0.0
   '@material/icon-button': 13.0.0
+  '@material/line-ripple': 13.0.0
+  '@material/list': 13.0.0
+  '@material/menu': 13.0.0
+  '@material/menu-surface': 13.0.0
+  '@material/notched-outline': 13.0.0
   '@material/radio': 13.0.0
   '@material/ripple': 13.0.0
   '@material/slider': 13.0.0
+  '@material/textfield': 13.0.0
   '@material/theme': 13.0.0
   solid-js: 1.3.12
 
@@ -459,6 +473,19 @@ packages:
       tslib: 2.3.1
     dev: false
 
+  /@material/floating-label/13.0.0:
+    resolution: {integrity: sha512-imAPamD97QrizVCOpxjr3UfQJyDBpEEhDBSbEbKLrCpqG3jQx4/My5rNKKVGWjxUiBYgBA1dhkn98RRX5tGBtQ==}
+    dependencies:
+      '@material/animation': 13.0.0
+      '@material/base': 13.0.0
+      '@material/dom': 13.0.0
+      '@material/feature-targeting': 13.0.0
+      '@material/rtl': 13.0.0
+      '@material/theme': 13.0.0
+      '@material/typography': 13.0.0
+      tslib: 2.3.1
+    dev: false
+
   /@material/form-field/13.0.0:
     resolution: {integrity: sha512-cXs5uYA89KgrXrU1UYkl52JizeIK3Mx9LjBw4ZYiyQJzFaBTPYsYWGSJMad1HZhWlRiigGTyN1M9ePIxtBpi0Q==}
     dependencies:
@@ -482,6 +509,71 @@ packages:
       '@material/rtl': 13.0.0
       '@material/theme': 13.0.0
       '@material/touch-target': 13.0.0
+      tslib: 2.3.1
+    dev: false
+
+  /@material/line-ripple/13.0.0:
+    resolution: {integrity: sha512-5djBRXrd1+SiMVUTWr4rD6xv+/qTaGGmgUS5GytBE5mczvnEwcPmM4PzF+HNj2TS+wvNvIfRjRmUzWO2Z6w2lA==}
+    dependencies:
+      '@material/animation': 13.0.0
+      '@material/base': 13.0.0
+      '@material/feature-targeting': 13.0.0
+      '@material/theme': 13.0.0
+      tslib: 2.3.1
+    dev: false
+
+  /@material/list/13.0.0:
+    resolution: {integrity: sha512-poq4WNDEfW6Z3YPAn3wdBX4RSkj3A83Pht6984MmG8YJZMlq34ftHECw37VcdmFJIyRPdpZqywJo/i7CxsSAgQ==}
+    dependencies:
+      '@material/base': 13.0.0
+      '@material/density': 13.0.0
+      '@material/dom': 13.0.0
+      '@material/feature-targeting': 13.0.0
+      '@material/ripple': 13.0.0
+      '@material/rtl': 13.0.0
+      '@material/shape': 13.0.0
+      '@material/theme': 13.0.0
+      '@material/typography': 13.0.0
+      tslib: 2.3.1
+    dev: false
+
+  /@material/menu-surface/13.0.0:
+    resolution: {integrity: sha512-Irfnk0l8AO7z8ucilbBzZI8izbFV/aK1GbiPpT1SmZuKkL1z+04rB2HpB+OqwaBixdLTDq70AyawcnQ0MACeXQ==}
+    dependencies:
+      '@material/animation': 13.0.0
+      '@material/base': 13.0.0
+      '@material/elevation': 13.0.0
+      '@material/feature-targeting': 13.0.0
+      '@material/rtl': 13.0.0
+      '@material/shape': 13.0.0
+      '@material/theme': 13.0.0
+      tslib: 2.3.1
+    dev: false
+
+  /@material/menu/13.0.0:
+    resolution: {integrity: sha512-RY9R2ubYU6a7WRJW3nWr/AoSzdrxwUGqkfJSx0U9M/wK1vbXYYcJ7eCXFzSpa5VrstE7of7PbyYtQ8V61tILEQ==}
+    dependencies:
+      '@material/base': 13.0.0
+      '@material/dom': 13.0.0
+      '@material/elevation': 13.0.0
+      '@material/feature-targeting': 13.0.0
+      '@material/list': 13.0.0
+      '@material/menu-surface': 13.0.0
+      '@material/ripple': 13.0.0
+      '@material/rtl': 13.0.0
+      '@material/theme': 13.0.0
+      tslib: 2.3.1
+    dev: false
+
+  /@material/notched-outline/13.0.0:
+    resolution: {integrity: sha512-BHdxr1x2AN4oqycTNg0FGisG3rMHf50z3MuyUoQsJJ3WGjxBMWKd0yK/xl4m38nFKPg1vQnzyHIYTJdRpCaE7A==}
+    dependencies:
+      '@material/base': 13.0.0
+      '@material/feature-targeting': 13.0.0
+      '@material/floating-label': 13.0.0
+      '@material/rtl': 13.0.0
+      '@material/shape': 13.0.0
+      '@material/theme': 13.0.0
       tslib: 2.3.1
     dev: false
 
@@ -537,6 +629,25 @@ packages:
       '@material/feature-targeting': 13.0.0
       '@material/ripple': 13.0.0
       '@material/rtl': 13.0.0
+      '@material/theme': 13.0.0
+      '@material/typography': 13.0.0
+      tslib: 2.3.1
+    dev: false
+
+  /@material/textfield/13.0.0:
+    resolution: {integrity: sha512-CzodrOqx8wzj2AQngMpISURJID4jVOHf4CtiPoj32LG8bWLn5ZfAAX2aA2rO6NPyDYsFm0aEnlfMhnDwQyPoYw==}
+    dependencies:
+      '@material/animation': 13.0.0
+      '@material/base': 13.0.0
+      '@material/density': 13.0.0
+      '@material/dom': 13.0.0
+      '@material/feature-targeting': 13.0.0
+      '@material/floating-label': 13.0.0
+      '@material/line-ripple': 13.0.0
+      '@material/notched-outline': 13.0.0
+      '@material/ripple': 13.0.0
+      '@material/rtl': 13.0.0
+      '@material/shape': 13.0.0
       '@material/theme': 13.0.0
       '@material/typography': 13.0.0
       tslib: 2.3.1

@@ -3,7 +3,7 @@
     "rootDir": "components",
     "outDir": "dist",
     "target": "ESNext",
-    "module": "ESNext", // "ESNext" ? :cry:
+    "module": "ESNext",
     //"declaration": true,
     
     "strict": true,

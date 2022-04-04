@@ -1,32 +1,35 @@
 import { createContext, createEffect, onCleanup, onMount, PropsWithChildren, useContext } from "solid-js";
 import { MDCRadio } from "@material/radio";
-import { assert, createOrInitSignal, OnlyPropsAndAttrs, Ref, renderable, Signal, SignalInit, splitPropsAndAttrs } from "../utils";
+import { assert, createOrInitSignal, OnlyPropsAndAttrs, Ref, renderable, Signal, SignalInit, SimpleSignal, splitPropsAndAttrs } from "../utils";
 
 import "./style.scss";
 import { FormFieldContext } from "../formfield";
 
-export type RadioGroupDelegate = {
+export type RadioGroupDelegate<T = string> = {
   group: string,
-  activeKey: Signal<string | null>,
+  activeKey: SimpleSignal<T>,
   addInput: (key: string, input: MDCRadio) => void,
   removeInput: (key: string) => void
 };
 
-export const RadioGroupContext = createContext<RadioGroupDelegate>();
+export const RadioGroupContext = createContext<RadioGroupDelegate<string|null>>();
 
 let radio_group_counter = 0;
 
-export const RadioGroup = (props: PropsWithChildren<{
+type RadioGroupProps<T extends string | null> = PropsWithChildren<{
   group?: string,
-  activeKey?: SignalInit<string|null>,
-  ref?: Ref<{activeKey: Signal<string|null>}>
-}>) => {
+  activeKey?: SignalInit<T>,
+  ref?: Ref<{activeKey: SimpleSignal<T>}>
+}>
+
+const _RadioGroup = <T extends string | null>(props: RadioGroupProps<T>) => {
   const group = props.group ?? `smc-radio-group-${radio_group_counter++}`;
   const input_map = new Map<string, MDCRadio>();
 
-  const activeKey = createOrInitSignal(props.activeKey, null);
+  // @ts-ignore Force typescript here
+  const activeKey: SimpleSignal<T> = createOrInitSignal(props.activeKey, null);
 
-  const delegate: RadioGroupDelegate = {
+  const delegate: RadioGroupDelegate<T> = {
     group,
     activeKey,
     addInput(key, input) {
@@ -39,13 +42,16 @@ export const RadioGroup = (props: PropsWithChildren<{
   };
 
   const html = (
-    <RadioGroupContext.Provider value={delegate}>
+    <RadioGroupContext.Provider value={delegate as unknown as RadioGroupDelegate<string | null>}>
       {props.children}
     </RadioGroupContext.Provider>
   )
 
   return renderable(props, {html, activeKey});
 }
+
+export const RadioGroup = (props: RadioGroupProps<string>) => _RadioGroup<string>(props);
+export const RadioGroupWithoutDefault = (props: RadioGroupProps<string | null> & {activeKey: SignalInit<string>}) => _RadioGroup<string | null>(props);
 
 export const Radio = (all_props: OnlyPropsAndAttrs<'div', {
   key: string,

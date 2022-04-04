@@ -1,6 +1,6 @@
 import { events, MDCSlider, MDCSliderChangeEventDetail } from "@material/slider";
 import { createSignal, onCleanup, onMount, Setter } from "solid-js";
-import { createOrInitSignal, OnlyPropsAndAttrs, Ref, renderable, Signal, SignalInit, SimpleSignalWrapper, splitPropsAndAttrs } from "../utils";
+import { createOrInitSignal, OnlyPropsAndAttrs, Ref, renderable, Signal, SignalInit, SimpleSignal, splitPropsAndAttrs } from "../utils";
 
 import "./style.scss";
 

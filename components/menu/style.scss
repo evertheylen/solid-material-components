@@ -1,0 +1,8 @@
+@use "../theme/default-theme.scss";
+
+@use "@material/menu-surface/mdc-menu-surface";
+//@use "@material/list/mdc-list";
+@use "@material/list";
+@use "@material/menu/mdc-menu";
+
+@include list.deprecated-core-styles;
