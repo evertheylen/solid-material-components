@@ -8,12 +8,12 @@ export enum ButtonVariant {
   Raised, Outlined, None
 };
 
-export const Button = (all_props: PropsAndAttrs<'button', {
+export const Button = (allProps: PropsAndAttrs<'button', {
   variant?: ButtonVariant,
   icon?: string
 }>) => {
   const [props, extra_attrs, attrs] = splitPropsAndAttrs(
-    all_props, ["variant", "icon", "children"], ["class", "classList"]
+    allProps, ["variant", "icon", "children"], ["class", "classList"]
   );
 
   let root!: HTMLButtonElement;

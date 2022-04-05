@@ -2,8 +2,9 @@ import { Component, createContext, createEffect, onCleanup, onMount, Show, useCo
 import { MDCChipSet, MDCChipSetSelectionEventDetail } from '@material/chips';
 import { MDCChipActionType } from '@material/chips/action/constants';
 
+import { assert, createOrInitSignal, PropsAndAttrs, Ref, renderable, splitPropsAndAttrs, SignalInit, SimpleSignal } from '../utils';
+
 import "./style.scss";
-import { assert, createOrInitSignal, PropsAndAttrs, Ref, renderable, Signal, splitPropsAndAttrs, SignalInit } from '../utils';
 
 // TODO remove having to pass through calls to MDCChipSet?
 // TODO action chips, choice chips, (shapes?)
@@ -40,11 +41,11 @@ const InnerChipSet: Component = (props) => {
   );
 }
 
-export const FilterChipSet = (all_props: PropsAndAttrs<'span', {
+export const FilterChipSet = (allProps: PropsAndAttrs<'span', {
   overflow?: boolean,
 }>) => {
   const [props, extra_attrs, attrs] = splitPropsAndAttrs(
-    all_props, ["overflow", "children"], ["class", "classList"]
+    allProps, ["overflow", "children"], ["class", "classList"]
   );
   
   return (
@@ -64,14 +65,14 @@ export const FilterChipSet = (all_props: PropsAndAttrs<'span', {
 
 let chipCounter = 0;
 
-export const FilterChip = (all_props: PropsAndAttrs<'span', {
+export const FilterChip = (allProps: PropsAndAttrs<'span', {
   checked?: SignalInit<boolean>,
   disabled?: boolean,
   icon?: string,
-  ref?: Ref<{checked: Signal<boolean>}>,
+  ref?: Ref<{checked: SimpleSignal<boolean>}>,
 }>) => {
   const [props, extra_attrs, attrs] = splitPropsAndAttrs(
-    all_props, ["disabled", "checked", "icon", "children", "ref"], ["class", "classList"]
+    allProps, ["disabled", "checked", "icon", "children", "ref"], ["class", "classList"]
   );
 
   const checked = createOrInitSignal(props.checked, false);

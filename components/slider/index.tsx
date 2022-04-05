@@ -4,14 +4,14 @@ import { createOrInitSignal, OnlyPropsAndAttrs, Ref, renderable, Signal, SignalI
 
 import "./style.scss";
 
-export const Slider = (all_props: OnlyPropsAndAttrs<'div', {
+export const Slider = (allProps: OnlyPropsAndAttrs<'div', {
   value?: SignalInit<number>,
   min?: number,
   max?: number,
   step?: number,
   ref?: Ref<{value: Signal<number>}>,
 }>) => {
-  const [props, extra_attrs, attrs] = splitPropsAndAttrs(all_props,
+  const [props, extra_attrs, attrs] = splitPropsAndAttrs(allProps,
     ["min", "max", "step", "value", "ref"], ["class"]
   );
 

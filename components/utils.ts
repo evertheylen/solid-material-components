@@ -107,22 +107,35 @@ export type OnlyPropsAndAttrs<T extends keyof JSX.IntrinsicElements, P> = Omit<P
 type Attr<T extends keyof JSX.HTMLAttributes<El>, El = HTMLElement> = JSX.HTMLAttributes<El>[T];
 type MergeFunc<T extends keyof JSX.HTMLAttributes<El>, El = HTMLElement> = (a: Attr<T, El>, b: Attr<T, El>) => Attr<T, El>;
 
-export const merge: {[Key in keyof JSX.HTMLAttributes<HTMLElement>]: MergeFunc<Key>} = {
+export type Mergeable = "class" | "classList";
+export const merge: {[Key in Mergeable]: MergeFunc<Key>} = {
   "class": (a, b) => `${a ?? ''} ${b ?? ''}`,
   "classList": (a, b) => ({...a, ...b}),
   // style can be just defined multiple times, Solid will merge them!
 }
 
 export function splitPropsAndAttrs<T extends object, Props extends keyof T, OverriddenAttrs extends (keyof T & keyof typeof merge)>(
-  all_props: T, prop_keys: Props[], overridden_attr_keys: OverriddenAttrs[]
+  allProps: T, prop_keys: Props[], overridden_attr_keys: OverriddenAttrs[]
 ): [Pick<T, Props>, { [P in OverriddenAttrs]: (x: T[P]) => T[P] }, Omit<T, Props | OverriddenAttrs>] {
-  const [props, raw_overridden_attrs, rest_attrs] = splitProps(all_props, prop_keys, overridden_attr_keys);
+  const [props, raw_overridden_attrs, rest_attrs] = splitProps(allProps, prop_keys, overridden_attr_keys);
   const overridden_attrs = new Proxy(
     raw_overridden_attrs,
     // @ts-ignore
     { get(target, prop, receiver) { return (value: any) => merge[prop](value, target[prop]) }}
   ) as unknown as { [P in OverriddenAttrs]: (x: T[P]) => T[P] };
   return [props, overridden_attrs, rest_attrs];
+}
+
+export function splitAttrs<T extends object, OverriddenAttrs extends (keyof T & keyof typeof merge)>(
+  allAttrs: T, overridden_attr_keys: OverriddenAttrs[]
+): [{ [P in OverriddenAttrs]: (x: T[P]) => T[P] }, Omit<T, OverriddenAttrs>] {
+  const [raw_overridden_attrs, rest_attrs] = splitProps(allAttrs, overridden_attr_keys);
+  const overridden_attrs = new Proxy(
+    allAttrs,
+    // @ts-ignore
+    { get(target, prop, receiver) { return (value: any) => merge[prop](value, target[prop]) }}
+  ) as unknown as { [P in OverriddenAttrs]: (x: T[P]) => T[P] };
+  return [overridden_attrs, rest_attrs];
 }
 
 

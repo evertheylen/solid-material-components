@@ -53,13 +53,13 @@ const _RadioGroup = <T extends string | null>(props: RadioGroupProps<T>) => {
 export const RadioGroup = (props: RadioGroupProps<string>) => _RadioGroup<string>(props);
 export const RadioGroupWithoutDefault = (props: RadioGroupProps<string | null> & {activeKey: SignalInit<string>}) => _RadioGroup<string | null>(props);
 
-export const Radio = (all_props: OnlyPropsAndAttrs<'div', {
+export const Radio = (allProps: OnlyPropsAndAttrs<'div', {
   key: string,
   disabled?: boolean,
   id?: string,
 }>) => {
   const [props, extra_attrs, attrs] = splitPropsAndAttrs(
-    all_props, ["key", "disabled", "id"], ["class"]
+    allProps, ["key", "disabled", "id"], ["class"]
   );
 
   const form_field_context = useContext(FormFieldContext);

@@ -1,0 +1,8 @@
+@use "../theme/default-theme.scss";
+
+@use "@material/textfield";
+@use "@material/floating-label/mdc-floating-label";
+@use "@material/line-ripple/mdc-line-ripple";
+@use "@material/notched-outline/mdc-notched-outline";
+
+@include textfield.core-styles;

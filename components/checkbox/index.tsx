@@ -8,14 +8,14 @@ import "./style.scss";
 
 // TODO indeterminate state seems to have a slight delay when displaying
 
-export const Checkbox = (all_props: OnlyPropsAndAttrs<'div', {
+export const Checkbox = (allProps: OnlyPropsAndAttrs<'div', {
   checked?: SignalInit<boolean | null>,
   disabled?: boolean,
   id?: string,
   ref?: Ref<{checked: SimpleSignal<boolean | null>}>
 }>) => {
   const [props, extra_attrs, attrs] = splitPropsAndAttrs(
-    all_props, ["checked", "disabled", "id", "ref"], ["class"]
+    allProps, ["checked", "disabled", "id", "ref"], ["class"]
   );
   
   const ffCtx = useContext(FormFieldContext);

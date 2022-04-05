@@ -4,12 +4,12 @@ import { OnlyPropsAndAttrs, splitPropsAndAttrs } from "../utils";
 
 import "./style.scss";
 
-export const IconButton = (all_props: OnlyPropsAndAttrs<'button', {
+export const IconButton = (allProps: OnlyPropsAndAttrs<'button', {
   icon: string,
   enabled?: boolean
 }>) => {
   const [props, extra_attrs, attrs] = splitPropsAndAttrs(
-    all_props, ["icon", "enabled"], ["class"]
+    allProps, ["icon", "enabled"], ["class"]
   );
 
   let root!: HTMLButtonElement;

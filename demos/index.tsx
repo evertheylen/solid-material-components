@@ -10,6 +10,7 @@ import { RadioDemo } from './radio';
 import { ChipDemo } from './chips';
 import { SliderDemo } from './slider';
 import { MenuDemo } from './menu';
+import { TextFieldDemo } from './textfield';
 
 import "./style.scss";
 
@@ -36,6 +37,8 @@ const App = () => (
     <SliderDemo/>
     <h3>Menu</h3>
     <MenuDemo/>
+    <h3>Textfield</h3>
+    <TextFieldDemo/>
   </div>
 )
 

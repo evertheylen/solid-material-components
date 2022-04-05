@@ -17,7 +17,7 @@ const MENU_TIMEOUT_MS = 200;
 
 // Not using MDCMenu as I want to control the state directly...
 
-export const Menu = (all_props: PropsAndAttrs<'div', {
+export const Menu = (allProps: PropsAndAttrs<'div', {
   anchorCorner?: Corner,
   ref?: Ref<{show_menu: () => void, close_menu: (timeout?: number) => void}>
 }>) => {
@@ -27,7 +27,7 @@ export const Menu = (all_props: PropsAndAttrs<'div', {
   let menu_surface!: MDCMenuSurface;
 
   const [props, extra_attrs, attrs] = splitPropsAndAttrs(
-    all_props, ['children', 'anchorCorner'], ['class']
+    allProps, ['children', 'anchorCorner'], ['class']
   );
 
   onMount(() => {
@@ -40,7 +40,7 @@ export const Menu = (all_props: PropsAndAttrs<'div', {
     menu_surface.destroy();
   });
 
-  return renderable(all_props, {
+  return renderable(allProps, {
     html: (
       <div class={extra_attrs.class("mdc-menu mdc-menu-surface")} ref={menu_surface_el} {...attrs}>
         <ul class="mdc-deprecated-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
@@ -60,31 +60,31 @@ export const Menu = (all_props: PropsAndAttrs<'div', {
 }
 
 
-export const RootMenuItem = (all_props: PropsAndAttrs<'li', {}>) => {
-  const [props, attrs] = splitProps(all_props, ['children'])
+export const RootMenuItem = (allProps: PropsAndAttrs<'li', {}>) => {
+  const [props, attrs] = splitProps(allProps, ['children'])
   return <li {...attrs}>{props.children}</li>
 }
 
 
-export const RootMenuDivider = (all_props: PropsAndAttrs<'li', {}>) => {
-  const [props, extra_attrs, attrs] = splitPropsAndAttrs(all_props, ['children'], ['class']);
+export const RootMenuDivider = (allProps: PropsAndAttrs<'li', {}>) => {
+  const [props, extra_attrs, attrs] = splitPropsAndAttrs(allProps, ['children'], ['class']);
   return <li {...attrs} class={extra_attrs.class('mdc-deprecated-list-divider')} role="separator">
     {props.children}
   </li>
 }
 
 
-export const MenuSelectionGroup = (all_props: PropsAndAttrs<'ul', {}>) => {
-  const [props, extra_attrs, attrs] = splitPropsAndAttrs(all_props, ['children'], ['class']);
+export const MenuSelectionGroup = (allProps: PropsAndAttrs<'ul', {}>) => {
+  const [props, extra_attrs, attrs] = splitPropsAndAttrs(allProps, ['children'], ['class']);
   return <ul class={extra_attrs.class('mdc-menu__selection-group')} {...attrs}>
     {props.children}
   </ul>
 }
 
 
-export const MenuItem = (all_props: PropsAndAttrs<'li', {selected: boolean, selectedIcon?: string}>) => {
+export const MenuItem = (allProps: PropsAndAttrs<'li', {selected: boolean, selectedIcon?: string}>) => {
   const [props, extra_attrs, attrs] = splitPropsAndAttrs(
-    all_props, ['children', 'selected', 'selectedIcon'], ['class', 'classList']
+    allProps, ['children', 'selected', 'selectedIcon'], ['class', 'classList']
   );
 
   let root!: HTMLLIElement;
