@@ -1,10 +1,10 @@
-import { Component, createContext, createEffect, onCleanup, onMount, Show, useContext } from 'solid-js';
-import { MDCChipSet, MDCChipSetSelectionEventDetail } from '@material/chips';
-import { MDCChipActionType } from '@material/chips/action/constants';
-
-import { assert, createOrInitSignal, PropsAndAttrs, Ref, renderable, splitPropsAndAttrs, SignalInit, SimpleSignal } from '../utils';
-
+import {MDCChipSet, MDCChipSetSelectionEventDetail} from '@material/chips';
+import {MDCChipActionType} from '@material/chips/action/constants';
+import {createContext, createEffect, onCleanup, onMount, ParentComponent, Show, useContext} from 'solid-js';
+import {assert, createOrInitSignal, PropsAndAttrs, Ref, renderable, SignalInit, SimpleSignal, splitPropsAndAttrs} from '../utils';
 import "./style.scss";
+
+
 
 // TODO remove having to pass through calls to MDCChipSet?
 // TODO action chips, choice chips, (shapes?)
@@ -12,7 +12,7 @@ import "./style.scss";
 
 const ParentChipSetContext = createContext<() => MDCChipSet>();
 
-const InnerChipSet: Component = (props) => {
+const InnerChipSet: ParentComponent = (props) => {
   let root!: HTMLSpanElement;
   let chipset!: MDCChipSet;
 
@@ -39,7 +39,7 @@ const InnerChipSet: Component = (props) => {
       </span>
     </ParentChipSetContext.Provider>
   );
-}
+};
 
 export const FilterChipSet = (allProps: PropsAndAttrs<'span', {
   overflow?: boolean,
@@ -47,7 +47,7 @@ export const FilterChipSet = (allProps: PropsAndAttrs<'span', {
   const [props, extra_attrs, attrs] = splitPropsAndAttrs(
     allProps, ["overflow", "children"], ["class", "classList"]
   );
-  
+
   return (
     <span
       class={extra_attrs.class('mdc-evolution-chip-set')}
@@ -60,7 +60,7 @@ export const FilterChipSet = (allProps: PropsAndAttrs<'span', {
       <InnerChipSet>{props.children}</InnerChipSet>
     </span>
   );
-}
+};
 
 
 let chipCounter = 0;
@@ -69,7 +69,7 @@ export const FilterChip = (allProps: PropsAndAttrs<'span', {
   checked?: SignalInit<boolean>,
   disabled?: boolean,
   icon?: string,
-  ref?: Ref<{checked: SimpleSignal<boolean>}>,
+  ref?: Ref<{checked: SimpleSignal<boolean>;}>,
 }>) => {
   const [props, extra_attrs, attrs] = splitPropsAndAttrs(
     allProps, ["disabled", "checked", "icon", "children", "ref"], ["class", "classList"]
@@ -124,7 +124,7 @@ export const FilterChip = (allProps: PropsAndAttrs<'span', {
           <span class="mdc-evolution-chip__checkmark">
             <svg class="mdc-evolution-chip__checkmark-svg" viewBox="-2 -3 30 30">
               <path class="mdc-evolution-chip__checkmark-path"
-                  fill="none" stroke="black" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                fill="none" stroke="black" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
             </svg>
           </span>
         </span>
@@ -134,4 +134,4 @@ export const FilterChip = (allProps: PropsAndAttrs<'span', {
   );
 
   return renderable(props, {html, checked});
-}
+};

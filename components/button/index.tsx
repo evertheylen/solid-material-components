@@ -1,19 +1,23 @@
-import { onMount, Show } from "solid-js";
-import { useRipple } from "../ripple";
-import { PropsAndAttrs, splitPropsAndAttrs } from "../utils";
-
+import {onMount, Show} from "solid-js";
+import {useRipple} from "../ripple";
+import {PropsAndAttrs, splitPropsAndAttrs} from "../utils";
 import "./style.scss";
 
+
 export enum ButtonVariant {
-  Raised, Outlined, None
+  Contained,
+  None,
+  Outlined,
+  Raised,
 };
 
 export const Button = (allProps: PropsAndAttrs<'button', {
   variant?: ButtonVariant,
-  icon?: string
+  icon?: string,
+  touch?: boolean,
 }>) => {
   const [props, extra_attrs, attrs] = splitPropsAndAttrs(
-    allProps, ["variant", "icon", "children"], ["class", "classList"]
+    allProps, ["variant", "icon", "children", "touch"], ["class", "classList"]
   );
 
   let root!: HTMLButtonElement;
@@ -30,6 +34,8 @@ export const Button = (allProps: PropsAndAttrs<'button', {
         'mdc-button--icon--leading': props.icon !== undefined,
         'mdc-button--outlined': props.variant === ButtonVariant.Outlined,
         'mdc-button--raised': props.variant === ButtonVariant.Raised,
+        'mdc-button--unelevated': props.variant === ButtonVariant.Contained,
+        'mdc-button--touch': props.touch,
       })}
       {...attrs}
     >
@@ -42,4 +48,4 @@ export const Button = (allProps: PropsAndAttrs<'button', {
       </Show>
     </button>
   );
-}
+};

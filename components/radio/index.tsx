@@ -1,26 +1,26 @@
-import { createContext, createEffect, onCleanup, onMount, PropsWithChildren, useContext } from "solid-js";
-import { MDCRadio } from "@material/radio";
-import { assert, createOrInitSignal, OnlyPropsAndAttrs, Ref, renderable, Signal, SignalInit, SimpleSignal, splitPropsAndAttrs } from "../utils";
-
+import {MDCRadio} from "@material/radio";
+import {createContext, createEffect, onCleanup, onMount, ParentProps, useContext} from "solid-js";
+import {FormFieldContext} from "../formfield";
+import {assert, createOrInitSignal, OnlyPropsAndAttrs, Ref, renderable, SignalInit, SimpleSignal, splitPropsAndAttrs} from "../utils";
 import "./style.scss";
-import { FormFieldContext } from "../formfield";
+
 
 export type RadioGroupDelegate<T = string> = {
   group: string,
   activeKey: SimpleSignal<T>,
   addInput: (key: string, input: MDCRadio) => void,
-  removeInput: (key: string) => void
+  removeInput: (key: string) => void;
 };
 
-export const RadioGroupContext = createContext<RadioGroupDelegate<string|null>>();
+export const RadioGroupContext = createContext<RadioGroupDelegate<string | null>>();
 
 let radio_group_counter = 0;
 
-type RadioGroupProps<T extends string | null> = PropsWithChildren<{
+type RadioGroupProps<T extends string | null> = ParentProps<{
   group?: string,
   activeKey?: SignalInit<T>,
-  ref?: Ref<{activeKey: SimpleSignal<T>}>
-}>
+  ref?: Ref<{activeKey: SimpleSignal<T>;}>;
+}>;
 
 const _RadioGroup = <T extends string | null>(props: RadioGroupProps<T>) => {
   const group = props.group ?? `smc-radio-group-${radio_group_counter++}`;
@@ -45,13 +45,13 @@ const _RadioGroup = <T extends string | null>(props: RadioGroupProps<T>) => {
     <RadioGroupContext.Provider value={delegate as unknown as RadioGroupDelegate<string | null>}>
       {props.children}
     </RadioGroupContext.Provider>
-  )
+  );
 
   return renderable(props, {html, activeKey});
-}
+};
 
 export const RadioGroup = (props: RadioGroupProps<string>) => _RadioGroup<string>(props);
-export const RadioGroupWithoutDefault = (props: RadioGroupProps<string | null> & {activeKey: SignalInit<string>}) => _RadioGroup<string | null>(props);
+export const RadioGroupWithoutDefault = (props: RadioGroupProps<string | null> & {activeKey: SignalInit<string>;}) => _RadioGroup<string | null>(props);
 
 export const Radio = (allProps: OnlyPropsAndAttrs<'div', {
   key: string,
@@ -76,8 +76,8 @@ export const Radio = (allProps: OnlyPropsAndAttrs<'div', {
   onMount(() => {
     radio = MDCRadio.attachTo(radio_el);
     form_field_context?.set_input(radio);
-    createEffect(() => { radio.disabled = props.disabled ?? false });
-    createEffect(() => { radio.checked = radio_group_context.activeKey.get() === key });
+    createEffect(() => {radio.disabled = props.disabled ?? false;});
+    createEffect(() => {radio.checked = radio_group_context.activeKey.get() === key;});
     radio.listen('change', (event: any) => {
       if (event.target.checked) {
         radio_group_context.activeKey.set(key);
@@ -88,7 +88,7 @@ export const Radio = (allProps: OnlyPropsAndAttrs<'div', {
   onCleanup(() => {
     radio_group_context.removeInput(key);
     radio.destroy();
-  })
+  });
 
   return (
     <div class={extra_attrs.class("mdc-radio")} ref={radio_el} {...attrs}>
@@ -101,4 +101,4 @@ export const Radio = (allProps: OnlyPropsAndAttrs<'div', {
       <div class="mdc-radio__focus-ring"></div>
     </div>
   );
-}
+};
