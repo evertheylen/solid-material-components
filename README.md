@@ -1,4 +1,10 @@
 
+> **❗ NOTE ❗**
+> 
+> **While this library may still be of use for those who want a simple wrapper for [Material Design Components](https://material.io/components/), I myself have been using https://github.com/swordev/suid and will be focusing my efforts there.**
+
+----------------------------------
+
 # Solid Material Components
 
 Port of [Material Design Components](https://material.io/components/) for [SolidJS](https://www.solidjs.com/). In the future, self-made components could be provided.
