@@ -1,10 +1,10 @@
-import { MDCCheckbox } from "@material/checkbox";
-import { createEffect, onCleanup, onMount, useContext } from "solid-js";
-
-import { FormFieldContext } from "../formfield";
-import { createOrInitSignal, OnlyPropsAndAttrs, Ref, renderable, SignalInit, SimpleSignal, splitPropsAndAttrs } from "../utils";
-
+import {MDCCheckbox} from "@material/checkbox";
+import {createEffect, onCleanup, onMount, useContext} from "solid-js";
+import {FormFieldContext} from "../formfield";
+import {createOrInitSignal, OnlyPropsAndAttrs, Ref, renderable, SignalInit, SimpleSignal, splitPropsAndAttrs} from "../utils";
 import "./style.scss";
+
+
 
 // TODO indeterminate state seems to have a slight delay when displaying
 
@@ -12,12 +12,13 @@ export const Checkbox = (allProps: OnlyPropsAndAttrs<'div', {
   checked?: SignalInit<boolean | null>,
   disabled?: boolean,
   id?: string,
-  ref?: Ref<{checked: SimpleSignal<boolean | null>}>
+  ref?: Ref<{checked: SimpleSignal<boolean | null>;}>,
+  touch?: boolean,
 }>) => {
   const [props, extra_attrs, attrs] = splitPropsAndAttrs(
-    allProps, ["checked", "disabled", "id", "ref"], ["class"]
+    allProps, ["checked", "disabled", "id", "ref", "touch"], ["class", "classList"]
   );
-  
+
   const ffCtx = useContext(FormFieldContext);
   const id = props.id ?? ffCtx?.input_id;
 
@@ -29,7 +30,7 @@ export const Checkbox = (allProps: OnlyPropsAndAttrs<'div', {
   const initChecked = checked.get();
 
   onMount(() => {
-    checkbox = new MDCCheckbox(checkboxElement)
+    checkbox = new MDCCheckbox(checkboxElement);
     ffCtx?.set_input(checkbox);
 
     // readonly state
@@ -44,7 +45,7 @@ export const Checkbox = (allProps: OnlyPropsAndAttrs<'div', {
         checkbox.checked = val;
       }
     });
-    
+
     checkbox.listen('change', (evt: any) => {
       checked.set(evt.target.checked);
     });
@@ -55,8 +56,8 @@ export const Checkbox = (allProps: OnlyPropsAndAttrs<'div', {
   });
 
   const html = (
-    <div class={extra_attrs.class("mdc-checkbox")} ref={checkboxElement} {...attrs}>
-      <input type="checkbox" class="mdc-checkbox__native-control" id={id} checked={initChecked ?? false}/>
+    <div class={extra_attrs.class("mdc-checkbox")} classList={extra_attrs.classList({'mdc-checkbox--touch': props.touch})} ref={checkboxElement} {...attrs}>
+      <input type="checkbox" class="mdc-checkbox__native-control" id={id} checked={initChecked ?? false} />
       <div class="mdc-checkbox__background">
         <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
           <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
@@ -65,7 +66,7 @@ export const Checkbox = (allProps: OnlyPropsAndAttrs<'div', {
       </div>
       <div class="mdc-checkbox__ripple"></div>
     </div>
-  )
+  );
 
   return renderable(props, {html, checked});
-}
+};
